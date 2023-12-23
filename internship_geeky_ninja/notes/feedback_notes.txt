@@ -1,0 +1,41 @@
+Check list
+  If you created a new page
+    did you add it to the mobile and desktop nav bar and footer?
+    Set the max width of the page content to the width that the site changes to the mobile layout
+  Did you change the cursor to pointer for hover elements?
+  Did you add the page link to the nav bar?
+  Is hovering/event fucntionality complete?
+  Card images should be in straight line
+  Did you Review colors and sizes?
+  Are things responsive?
+    making page responsive
+      reduce font-size for smaller screen sizes 
+      reduced number of columns depending on screen width
+      find where elements collide and change rows to columns
+        -separating row elements considering how you would transform them to columns
+      removed grid row number
+      rows are dynamically created
+        added "main" container
+      for sizing and responsivness
+      sized main container
+        with a "max-width"
+          max-width: 1200px;
+          the max width is the same as
+          the width that it changes to the mobile layout at
+          max-width will allow the content to shrink on
+          smaller displays while at not getting stretched out on larger displays
+        and margin
+          adding a top margin of 145px to make room for the navbar
+          adding auto margins on both sidesto center the content
+          adding an @media attribute to chnage the margins when the width of the screen changes
+          margin: 145px auto 0 auto;
+          @media only screen and (max-width: 1200px)
+            .main[data-v-d16d3411] {
+                margin: 0 auto 0 auto;
+            }
+          }
+      fix nav bar
+          I have no clue what was rwrong with this
+  Is there code inside of the codebase interfering with your code?
+    EX: a site wraper shrinking your content
+    Ask for instructions on how to continue

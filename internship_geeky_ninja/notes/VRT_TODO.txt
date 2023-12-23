@@ -1,0 +1,29 @@
+Rewards page
+  on mobile devices(max width 80px)
+  when current view current stake is clicked
+  create a smooth scroll to the top of the current stake section
+  above the updated stake section
+Daily Script - No hard deadline
+  Actually sort of. Not writing solidity, but interacting with it a bit. You did that script to pull....was it pollen and/or helium data for Andrew's dashboard didn't you?
+  We're going to be creating something sort of like that for VRT.
+  In a nutshell it will consist of:
+  1. Look at event logs and record every address that stakes/modifies, save it into a Supabase table
+    passive implemtnation
+      to get event logs
+      await contract.getPastEvents('MyEvent', {fromBlock: 0})
+      get contract address
+  2. Given a max number of transactions per day, run a loop and call claimRewards(the_address) on whichever address hasn't been claimed in the longest.
+  Number 3 will require dealing with having a wallet loaded and the ability to write transactions, not just read web3 data.
+  It's not solidity work, but it's something that we'll be doing. Either Jasper, Daniel, or you, or a collaboration. We have examples of these in the wHNT repo as well.
+  Can you do this while I get to the rewards redemption?
+  (FYI you'll need to modify the portfolio section in the portfolio.vue file.)
+Done
+  Withdraw feature = Unknown put present deadline
+    8. New feature: Withdraw feature, header update:
+    Change the information boxes into a
+      3 column layout like above,
+      make them a bit taller,
+      use a larger font.
+    Place claim button in a separate row as a 2 column layout, with a "Withdraw Stake" button to the right, this button will be gray/disabled for now.  
+    - Future logic will call the withdraw() function, but only be available if the user's stake time == 0. (We have 30 days after contracts/DApp goes live before this needs to be live.
+  show connect wallet button instead of Approve $VRT

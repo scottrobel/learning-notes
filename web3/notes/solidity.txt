@@ -1,0 +1,652 @@
+Specify solidity version at top
+  min and max versions
+    pragma solidity >0.6.0 < 0.9.0;
+  specific version
+    pragma solidity 0.6.0;
+  version or sub version
+    any version of 0.6
+    pragma solidity ^0.6.0;
+SPDX identifier
+  just use MIT license
+// SPDX-License-Identifier: MIT
+Declaring contract
+  contract SimpleStorage {
+    type variableName = value;
+  }
+  types on solidity get initialized to their null value
+  for example
+    uint256 favoriteNumber;
+    sets favoriteNumber to 0
+variables
+  public variables have a view function
+storage
+  memory
+    You need to declare string parameters as memorty
+    will only be stored duing execution
+  storage
+    will be stored after
+Arrays052a565b60405180910390f35b610094600480360381019061008f919061046d565b61011c565b005b6100b060048036038101906100ab9190610411565b610126565b005b6100cc60048036038101906100c791906103c8565b6101b6565b6040516100d9919061052a565b60405180910390f35b6100fc60048036038101906100f79190610
+  People[] public people = new People[]();
+mapping
+  kind of like a dictionary or hash
+  mapping(datatype => datatype) visibility mappingName
+  mappingName[data] = data
+  mapping(string => uint256) public nameToFavoriteNumber;
+declaring types
+  uint = unsigned integer - not positive or negitive
+  int = integer
+  uint256 = unsigned integer 256 bytes
+  bool = boolean
+  string = string
+  address = block chain address
+declaring a function
+  function functionName(paramType paramName) publicOrPrivate{
+    code
+  }
+  example
+  function store (uint256 _favoriteNumber) public {
+    favoriteNumber = _favoriteNumber
+  }
+devlaring visibility
+  public
+    called by anybody
+  external
+    cannot be called by same contract
+    -includes variables
+  internal - default setting
+    can only be internally called by other functions in the contract
+  private
+    only visible for the contract they are defined in and not dirived contracts
+function type
+  view
+    function that reads state off the blockchain
+    example
+      function retrieve() public view returns(uint256) {
+        return favoriteNumber;
+      }
+  pure
+    functions that "purley" do some type of math
+    doesnt change state?
+  payable
+    functions that you can pay another token to
+  
+structs
+  kind of like objects in python
+  struct People {
+    uint favoriteNumber;
+    string name;
+  }
+  People public person = People({favoriteNumber: 2, name:  "Scott"});
+  StructName visibility variableName = StructName({ Data });
+scope
+  variables can only be used in the function they are defined in
+Notes on the IDE
+  recompile before you deploy
+importing code
+  to import a contract
+  import "./SimpleStorage.sol";
+creating instance of contract
+  ex: SimpleStorage contract
+   SimpleStorage simpleStorage = new SimpleStorage();
+Notes on being a good dev
+  Solidity is constantly updating
+  To be a good developer,
+  you must be good at switching between versions
+getting an instance of a contract
+  1. get index of contract in array(if its in an array)
+  2. get the address of the contract
+    address(contractArray[_contract_index])
+  3.pass the address into the contract as parentheses
+    SimpleStorage(address)
+  4.final result
+    ContractName(address(ContractArray[_contract_index]))
+inheritance
+  contract contractName is InheritedContract{
+    //this contract will have all the methods of the inherited contract
+  }
+transaction fields
+  nonce
+    tx count for the account
+  gas price
+    price per unit of gas
+  gas limit
+    max gas this tx can use
+  to
+    address that the tx can use
+  value
+    amount of wei to send
+  data
+    what to send to the to address
+  v, r, s
+    components of the tx signature
+exponents
+  shorthand for a number with alot of 0s
+  1eNumberOfZeros
+  1e3 = 1000
+require
+  method that tests a condition  and reverts with an error message specified if the condition isnt true
+  Once the transaction is reverted, All data is changed back to previeous values
+  gas spend on transactions before the transaction reverts is still spent
+  remaining gas is still returned
+reverts
+  method that reverts the function
+chainlink
+  Contracts have to be deterministic to reach consensus
+  this makes it hard to get pricing data
+  Contracts cannot call HTTPS endpoints because it will not reach consensus
+  Chainlink brings
+    brings data
+    external computation 
+Hybrid smart contracts
+  combine on chain and off chain to build feature rich applications
+ABI - Application binary interface
+  to import a contract
+    ContractName contractInstanceVariableName = ContractName(contractAddress);
+  to call a function on the contract
+    datatype variableName = contractInstanceVariableName.contractMethod();
+  if it returns multiple variable, don't waste gas on storing variables you don't need
+    (,int256 price,,,)  = priceFeed.latestRoundData();
+sending currency to a transaction
+  msg.value = amount of eth/bnb sent with transaction
+  return type of msg.value
+    uint256
+type casting
+  wraping one variable in another variable type can convert the data type
+  doenst work with all varaible
+  example
+  int256 cool = 3023;
+  uint256 man = uint256(cool)
+price feeds
+  import chain link contract
+    import "@chainlink/contracts/src/v0.6/interfaces/AggregatorV3Interface.sol";
+  create instance with contract address
+    AggregatorV3Interface priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
+  get price
+    (,int256 price,,,)  = priceFeed.latestRoundData();
+libraries
+  syntax
+    library LibraryName{
+
+    }
+  cant have state variables
+  cant send ether
+  all functions have the "internal" view declaration
+adding/overloading functions on existing data types
+  Create a library
+    PriceConverter.sol
+      library PriceConverter{
+
+      }
+  add Functions
+    must be internal view functions
+    The first parameter should be the data type you adding/changing the function on
+    function getPrice() internal view returns(uint256){
+        AggregatorV3Interface priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e);
+        (,int256 price,,,)  = priceFeed.latestRoundData();
+        return uint256(price * 1e10);
+    }
+  import to datatype in class
+    using PriceConverter for uint256
+reducing gas fees
+  use "unchecked" key word
+  reset data structurs by assigning a new one
+  do not loop though array resetting every variable
+  if a variable is onlyh declared once
+    if declared and set in same line outside of function
+      set to constant
+    if declared and set on different lines but only set once(think constructor variables)
+      set to immutable
+  call error code instead of error message
+    so you do not have to store a full string
+Math wraping
+  before version 0.8
+    numbers would wrap once they reach their limits
+    wrapping numbers are called "unchecked"
+  after 0.8
+    wrapping numbers throw errors
+    numbers that do not wrap are called checked
+    unchecked arithmetic
+      unchecked {state changing math}
+      this will reducde gas fees
+for loop
+  for(uint256 funderIndex = 0; funderIndex < funders.length; funderIndex++){
+  }
+sending native currency from a contract
+  data needed
+    address senderAddress = msg.sender
+    payableAddress payableSenderAddress = payable(senderAddress)
+    uint256 balance = address(this).balance;
+  method options
+    payableAddress.transfer(balance)
+      throws error
+      2300 gas cap
+    payableAddress.send(balance)
+      returns bool
+      2300 gas cap
+    (bool callSuccess, bytes memory dataReturned) = payableAddress.call{ options }("");
+    reccomended for sending blockchain native tokens
+    doesnt have gas cap
+      you can set a gas cap though
+    // if you only need one variable returned
+      (bool callSuccess,) = payableAddress.call{ options }("");
+constructor
+  function that is called when you deploy a contract
+  constructor(){
+    
+  }
+modifiers
+  a function called before a function that can be added to the head of a function
+  how to use
+    create modifier inside contract
+      modifer modifierName {
+      }
+    add code to contract that you want to execute before a fucntion
+      modifier modifierName {
+        require(msg.sender == owner, "You must be sender to use this function");
+      }
+    add underscore in the code where you want to execute the function
+      modifier modifierName {
+        require(msg.sender == owner, "You must be sender to use this function");
+        _;
+      }
+    add code you want to execute after the function after the underscore
+      modifier modifierName {
+        require(msg.sender == owner, "You must be sender to use this function");
+        _;
+        require(condition, "Error message")
+      }
+    add modifier to head of method
+      function withdraw() public onlyOwner {
+
+      }
+constants / immutable
+  constants
+    only for variables assigned outside of functions
+    uint256 public constant MINIMUM_USD = 50 * 1e18;
+    Use all caps with underscores
+  immutable
+    use for
+      varaibles that you only set one time
+      declared and set in different places
+    saves gas
+      does this by storing varibale into byte code of contract instead of storage
+    nameing
+      set to i_variable_name
+    syntax
+      address public immutable i_owner;
+        constructor() public{
+            i_owner = msg.sender;
+        }
+custom errors
+  declare error outside of contract
+    error NotOwner;
+    if(msg.sender != i_owner){
+      revert NotOwner();
+    }
+receive function
+  automatically executed with money is sent to contract without a specified functiom
+  cannot return anything
+  syntax
+    receive() external payable() {
+        
+    }
+fall back function  
+  executed when there is no function specified in transaction
+  or a function is specified that does not exist
+debugging
+  resetting installation
+    yarn hardhat clean
+    yarn
+  tinker to try and figure out what is going on
+  google the exact error
+  ask for help if you spend more than 20 minutes on it
+  for course goto github update repo when stuck
+  ask stack exchange eth
+  asking questions
+  return to 5:35 if stuck
+hard hat
+  smart contract development framework
+Compiling code with solc
+  yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleStorage.sol
+running a rpc test server locally
+  ganache
+importing ethers
+  yarn add ethers
+  const ethers = require("ethers");
+loading provider
+  const provider = new ethers.providers.JsonRpcProvider("http://127.0.0.1:8545");
+loading wallet
+  const wallet = new ethers.Wallet("0x5e98a6eced885ce9ec5b2027d38afdfe22a5e1ea580e0f0339b22b221e835db3", provider);
+sending a transaction with ethers
+  get nonce
+    const nonce = await wallet.getTransactionCount();
+  create transaction data
+  const tx = {
+    nonce: nonce, uniquie transaction number
+    gasPrice: 20000000000, dont know??
+    gasLimit: 1000000, max gas to deploy transacion
+    to: null, where the transaction  is going to. Null if minting contract 
+    value: 0, amount of native tokens sending
+    data: "0x608060405234801561001057600080fd5b50610771806100206000396000f3fe608060405234801561001057600080fd5b50600436106100575760003560e01c80632e64cec11461005c5780636057361d1461007a5780636f760f41146100965780638bab8dd5146100b25780639e7a13ad146100e2575b600080fd5b610064610113565b604051610071919061052a565b60405180910390f35b610094600480360381019061008f919061046d565b61011c565b005b6100b060048036038101906100ab9190610411565b610126565b005b6100cc60048036038101906100c791906103c8565b6101b6565b6040516100d9919061052a565b60405180910390f35b6100fc60048036038101906100f7919061046d565b6101e4565b60405161010a929190610545565b60405180910390f35b60008054905090565b8060008190555050565b6001604051806040016040528083815260200184815250908060018154018082558091505060019003906000526020600020906002020160009091909190915060008201518160000155602082015181600101908051906020019061018c9291906102a0565b505050806002836040516101a09190610513565b9081526020016040518091039020819055505050565b6002818051602081018201805184825260208301602085012081835280955050505050506000915090505481565b600181815481106101f457600080fd5b906000526020600020906002020160009150905080600001549080600101805461021d9061063e565b80601f01602080910402602001604051908101604052809291908181526020018280546102499061063e565b80156102965780601f1061026b57610100808354040283529160200191610296565b820191906000526020600020905b81548152906001019060200180831161027957829003601f168201915b5050505050905082565b8280546102ac9061063e565b90600052602060002090601f0160209004810192826102ce5760008555610315565b82601f106102e757805160ff1916838001178555610315565b82800160010185558215610315579182015b828111156103145782518255916020019190600101906102f9565b5b5090506103229190610326565b5090565b5b8082111561033f576000816000905550600101610327565b5090565b60006103566103518461059a565b610575565b90508281526020810184848401111561037257610371610704565b5b61037d8482856105fc565b509392505050565b600082601f83011261039a576103996106ff565b5b81356103aa848260208601610343565b91505092915050565b6000813590506103c281610724565b92915050565b6000602082840312156103de576103dd61070e565b5b600082013567ffffffffffffffff8111156103fc576103fb610709565b5b61040884828501610385565b91505092915050565b600080604083850312156104285761042761070e565b5b600083013567ffffffffffffffff81111561044657610445610709565b5b61045285828601610385565b9250506020610463858286016103b3565b9150509250929050565b6000602082840312156104835761048261070e565b5b6000610491848285016103b3565b91505092915050565b60006104a5826105cb565b6104af81856105d6565b93506104bf81856020860161060b565b6104c881610713565b840191505092915050565b60006104de826105cb565b6104e881856105e7565b93506104f881856020860161060b565b80840191505092915050565b61050d816105f2565b82525050565b600061051f82846104d3565b915081905092915050565b600060208201905061053f6000830184610504565b92915050565b600060408201905061055a6000830185610504565b818103602083015261056c818461049a565b90509392505050565b600061057f610590565b905061058b8282610670565b919050565b6000604051905090565b600067ffffffffffffffff8211156105b5576105b46106d0565b5b6105be82610713565b9050602081019050919050565b600081519050919050565b600082825260208201905092915050565b600081905092915050565b6000819050919050565b82818337600083830152505050565b60005b8381101561062957808201518184015260208101905061060e565b83811115610638576000848401525b50505050565b6000600282049050600182168061065657607f821691505b6020821081141561066a576106696106a1565b5b50919050565b61067982610713565b810181811067ffffffffffffffff82111715610698576106976106d0565b5b80604052505050565b7f4e487b7100000000000000000000000000000000000000000000000000000000600052602260045260246000fd5b7f4e487b7100000000000000000000000000000000000000000000000000000000600052604160045260246000fd5b600080fd5b600080fd5b600080fd5b600080fd5b6000601f19601f8301169050919050565b61072d816105f2565b811461073857600080fd5b5056fea264697066735822122005f4761e428b272cff3be71d18d77c255fd57b725a8cec4f019c4e1beb4ada8164736f6c63430008070033",
+      data = binary transaction data
+    chainId: 1337
+  }
+  const sentTxResponse = await wallet.sendTransaction(tx);
+  await sentTxResponse.wait(1);
+sending a transaction
+  create contract instance
+  use instance to call function on it
+    const currentFavoriteNumber = await contract.retrieve();
+encrypting private keys
+  declare wallet in ethers
+    const wallet = new ethers.Wallet(privateKey);
+  encrypt the key
+    const encryptedJsonKey = await ethers.encrypt(privateKeyPassword, privateKey);
+  paste to file
+  create wallet from
+    let wallet = new ethers.Wallet.fromEncryptedJsonSync(encryptedJson, process.env.PRIVATE_KEY_PASSWORD);
+  connect with a provider
+    const provider = new ethers.providers.JsonRpcProvider(process.env.RPC_URL);
+    wallet = await wallet.connect(provider);
+connecting wallet to provider
+  wallet = await wallet.connect(provider);
+running script with password
+  run script
+    PRIVATE_KEY_PASSWORD=password node deploy.js
+  clear history to hide password
+    history -c
+securing private key  
+  don't put private key in .env
+  if you push your repo with key
+    consider it comprimised and move the funds
+  see the ".env pledge"
+hardhat
+  waiting a specific number of blocks
+    await simpleStorage.deployTransaction.wait(6)
+  creating hardhat project
+    mkdir ./new_project_folder
+    cd ./new_project_folder
+    yarn init
+    yarn add --dev hardhat
+    yarn hardhat
+    open hardhat.config.js
+    change solidity version
+    yarn add --dev hardhat-deploy
+    add to hardhat.config.js
+    mkdir ./deploy
+    yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
+  hardhat commands
+    compile code
+      yarn hardhat compile
+    get keys
+      yarn hardhat accounts
+  getting a contract by name
+    const SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage");
+    deploys to the hardhat network
+  deploying a contract
+    const simpleStorage = await SimpleStorageFactory.deploy();
+    await simpleStorage.deployed()
+  specifying network
+    add dotenv
+      yarn add --dev dotenv
+    create .gitignore with url
+      GOERLI_RPC_URL=https://eth-goerli.g.alchemy.com/v2/xO3T1CST01dCzvyKGtjQai4vyvBV-NL5
+    import to hardhat.config.js
+      require("dotenv").config();
+      const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
+    add networks key to module exports
+    add accounts
+    const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
+    const PRIVATE_KEY = process.env.PRIVATE_KEY;
+    module.exports = {
+      defaultNetwork: "hardhat",
+      networks: {
+        goerli: {
+          url: GOERLI_RPC_URL,
+          accounts: [PRIVATE_KEY],
+          chainId: 5
+        },
+      },
+      solidity: "0.8.8",
+    };
+
+    specifying in hardhat.config.js
+      defaultNetwork: "hardhat",
+    specifying in command line
+      yarn hardhat run scripts/deploy.js --network hardhat
+  verifying contract
+    install hardhat etherscan plugin
+      yarn add --dev @nomiclabs/hardhat-etherscan
+    add plugin to hardhat.config.js
+      require("@nomiclabs/hardhat-etherscan")
+    add api etherscan key to .env
+      ETHERSCAN_API_KEY=JYYI924BF5RJ38PVXRPWUQME3KAJUW6H
+    add to config
+      etherscan: {
+        apiKey: ETHERSCAN_API_KEY
+      }
+    now there is a hardhat function called "verify"
+    this can be called by commandline with hard hat verify
+    of you can call this function (or any function of hardhats) by...
+      importing run from hardhats
+        const { ethers, run } = require("hardhat")// hardhat brings ethers into scope
+      await run("verify:verify", {
+        address: contractAddress,
+        constructorArguments: args
+      });
+  get network info in script
+    import network from hardhat
+      const { ethers, run, network } = require("hardhat")// hardhat brings ethers into scope
+  creating a task
+    create tasks folder in root directory of project
+  create file with task name 
+    block-number.js
+  import task function to file
+    const { task } = require("hardhat/config");
+  use task function
+    task("block-number", "Prints the current block number").setAction(
+      async(taskArgs, hre) => {
+        const blockNumber = hre.ethers.provider.getBlockNumber;
+      }
+    )
+  the hre is a hardhat library to do functions on
+  add the task file to config
+  =>hardhat.config.js:
+    require("./tasks/block-number")
+debugging
+  creayting a local testnet
+  will already have deployed contracts
+    yarn hardhat node
+      localhost: {
+        url: "http://127.0.0.1:8545/",
+        //accounts: [], hardhat alread gives us the accounts
+        chainId: 31337
+      }
+  hardhat js console
+     yarn hardhat console
+creating tests
+  create file in "test" folder
+    test-deploy.js
+  import ethers and test methods
+    const { ethers }  = require("hardhat")
+    const { expect, assert } = require("chai")
+  create describe method - contains desired functionalty
+    describe("SimpleStorage", ()=>{
+    })
+  create setup in before each
+  initialize variables needed in tests outside function
+    let SimpleStorageFactory, simpleStorage
+    beforeEach(async function(){
+      SimpleStorageFactory = await ethers.getContractFactory("SimpleStorage")
+      simpleStorage = await SimpleStorageFactory.deploy()
+    })
+  create test
+    it("Should start with a favorite number of 0", async function () {
+      const currentValue = await simpleStorage.retrieve()
+      const expectedValue = "0"
+      assert.equal(currentValue.toString(), expectedValue)
+      //or alternative syntax
+      expect(currentValue.toString()).to.equal(expectedValue)
+    })
+  only run one test
+    it.only("Should start with a favorite number of 0", async function () {
+      const currentValue = await simpleStorage.retrieve()
+      const expectedValue = "0"
+      assert.equal(currentValue.toString(), expectedValue)
+    })
+  run tests
+    yarn hardhat test
+gas reporter
+  install gas reported
+    yarn add hardhat-gas-reporter --dev
+  require package in config
+    require("hardhat-gas-reporter")
+  enable it in hardhat config
+    gasReporter: {
+      enabled: true,
+      outputFile: "gas-report.txt",
+      noColors: true,
+      currency: "USD"
+    }
+security
+  solidity coverage
+    shows what lines of code are not tested
+    installing it
+      yarn add --dev
+    running it
+      yarn hardhat     yarn add --dev hardhat-deploy
+    add to hardhat.config.js
+    mkdir ./deploy
+    yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers etherscoverage
+linting solidity  
+  download solhint
+  yarn solhint contracts/*.sol 
+adding external scripts
+  yarn add --dev @chainlink/contracts
+  in solidity file
+  import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+hardhat deploy
+  add hardhat-deploy to project
+    yarn add --dev hardhat-deploy
+    add to hardhat.config.js
+    mkdir ./deploy
+    yarn add --dev @nomiclabs/hardhat-ethers@npm:hardhat-deploy-ethers ethers
+  cretaing deploy script
+    add file to deploy folder
+      01-deploy-fundme.js
+    import network to script
+      const { network } = require("hardhat") 
+    assign async function to module.exports
+      module.exports = async (hre) =>{
+      }
+    note that hardhat object is passed intot function so there is no need to import it
+    pull out the hardhat methods you want to use in the parameter section and first lines
+      module.exports = async ({ getNamedAccounts, deployments }) =>{
+        const { deploy, log } = deployments
+      }
+    add named accounts to the hardhat config
+    assign default to the index of the private key on the accuonts section
+      namedAccounts: {
+        deployer: {
+          default: 0,
+        }
+      }
+    pull account by name
+      const { deployer } = await getNamedAccounts()
+    get chain id
+      const chainId = network.config.chainId
+    create helper-hardhat-config.js
+      this will store chain specific variables
+      export chain specific data from file
+        const networkConfig = {
+          5: {
+            name: "Goerli",
+            ethUsdPriceFeed: "0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e"
+          },
+          137: {
+            name: "polygon",
+            ethUsdPriceFeed: "0xF9680D99D6C9589e2a93a78A04A279e509205945"
+          }
+        }
+
+        const developmentChain = ["hardhat", "localhost"]
+        module.exports = {
+          networkConfig
+        }
+    import chain specific data from config files
+      const { networkConfig } = require("../helper-hardhat-config")
+    adding a tag to the deploy script / grouping deploy scripts
+      add this to the bottom of the file
+        module.exports.tags = ["tag_one", "tag_two"]
+      executing deploy scripts based on tag
+        yarn hardhat deploy --tags tag_one
+  deploying mocks
+    create file
+      touch ./deploy/00-deploy-mocks.js
+    paste this in
+      const { network } = require("hardhat")
+      const { developmentChains } = require("../helper-hardhat-config")
+      module.exports = async ({ getNamedAccounts, deployments }) =>{
+        const { deploy, log } = deployments
+        const { deployer } = await getNamedAccounts()
+        const chainId = network.config.chainId
+      }
+    create test folder in contracts to keep mock contracts
+      mkdir ./contracts/test
+    create fake contract  prefixed with mock
+      touch ./contracts/test/MockV3Aggregator.sol
+    import mock into file from npm library
+      // SPDX-License-Identifier: MIT
+      pragma solidity ^0.6.0;
+      import "@chainlink/contracts/src/v0.6/tests/MockV3Aggregator.sol";
+    add new solidity version to hardhat.config
+      solidity: {
+        compilers: [
+          {version: "0.8.8"},
+          {version: "0.6.6"}
+        ]
+      },
+    if the contract is on the test network it will deploy a mock
+      if (developmentChains.includes(network.name)){
+        log("Local network detected! Deploying mocks...")
+        await deploy("MockV3Aggregator", {
+          contract: "MockV3Aggregator",
+          from: deployer,
+          log: true,
+          args: [DECIMALS, INITIAL_ANSWER]
+        })
+        log("Mocks deployed")
+        log("0------------------------------------------")
+      }
+  using mocks
+    get the last deployed mock by the mock name if you are on a local development network
+      if(developmentChains.includes(network.name)){
+        const ethUsdAggrgator = await deployments.get("MockV3Aggregator")
+        ethUsdPriceFeedAddress = ethUsdAggrgator.address
+      }
+    get the onchain address of contract using network config file
+      else { 
+        ethUsdPriceFeedAddress = networkConfig[chainId]["ethUsdPriceFeed"]
+      }
+utilities
+  add a file in utils folder
+    touch ./utils/verify.js
+  add function to export
+    const verify = async (contractAddress, args) => {
+
+    }
+    module.exports = { verify }
+  import utility
+    const { verify } = require("../utils/utilName")
+documentation
+  https://github.com/othneildrew/Best-README-Template
+solidity version conflicts
+  you can define multiple soldiity versions in hardhat.config.js
+importing contract from github
+  // SPDX-License-Identifier: MIT
+  pragma solidity ^0.6.0;
+  import "@chainlink/contracts/src/v0.6/tests/MockV3Aggregator.sol";
+Development specific code
+
+left off @  10:53:37
+https://www.youtube.com/watch?v=gyMwXuJrbJQ&t=31646s&ab_channel=freeCodeCamp.org

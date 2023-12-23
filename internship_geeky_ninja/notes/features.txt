@@ -1,0 +1,154 @@
+Dynamic navbars
+  toggling a dropdown menu
+    toggling icons
+      create two headers with symbols from googles icon font
+        <h2 class="material-symbols-outlined">Menu</h2>
+        <h2 class="material-symbols-outlined">Close</h2>
+      create a data property for wether the menu is toggled or not
+        import { ref } from "vue";
+        const menuDropdown = ref(false);
+      create a method to toggle the data property
+        const toggleMenuDropdown = () => {
+          menuDropdown.value = !menuDropdown.value;
+        };
+      add a click listener to the two symbol headers triggering the toggle method
+        <h2 @click="toggleMenuDropdown" class="material-symbols-outlined">Menu</h2>
+        <h2 @click="toggleMenuDropdown" class="material-symbols-outlined">Close</h2>
+      add the v-show method on the two symbol headers
+        show the menu button if toggleMenuDropdown is false
+          <h2 @click="toggleMenuDropdown" class="material-symbols-outlined"
+          v-show="!menuDropdown">Menu</h2>
+        show the close button if the toggleMenuDropdown is true
+          <h2 @click="toggleMenuDropdown" class="material-symbols-outlined"
+          v-show="menuDropdown">Menu</h2>
+      CSS position
+        place the elements inside menu-btn div
+          the parent elenent also contains
+            site logo
+            mobile menu content
+          <div class="menu-btn">
+            <h2 @click="toggleMenuDropdown" class="material-symbols-outlined">Menu</h2>
+            <h2 @click="toggleMenuDropdown" class="material-symbols-outlined">Close</h2>
+          </div>
+        create a @media section for mobile styles
+          only uses inner CSS if the screen width is 991px or less
+          @media only screen and (max-width: 991px){
+
+          }
+        target the elements inside the the div.menu-btn and position the logos
+          @media only screen and (max-width: 991px){
+            .menu-btn > h1 {
+              position: absolute;
+              top: 5px;
+              right: 5px;
+            }
+          }
+        remove the ability for a user to select the logo like it is text
+          use user-select: none;
+          @media only screen and (max-width: 991px){
+            .menu-btn > h1 {
+              position: absolute;
+              top: 5px;
+              right: 5px;
+              user-select: none;
+            }
+          }
+        set size of icons with font-size property and rem units
+        use font-size: 3rem;
+          @media only screen and (max-width: 991px){
+            .menu-btn > h1 {
+              font-size: 3rem;
+              position: absolute;
+              top: 5px;
+              right: 5px;
+              user-select: none;
+            }
+          }
+        set the cursor type to let the users know it is a button.
+          use cursor: pointer;
+          @media only screen and (max-width: 991px){
+            .menu-btn > h1 {
+              cursor: pointer;
+              font-size: 3rem;
+              position: absolute;
+              top: 5px;
+              right: 5px;
+              user-select: none;
+            }
+          }
+    toggling content menu
+      create a div with the content you need inside
+  animations
+    Use a keyframe to define to define a dropdown animation
+      see keyframes in css.txt for more info
+  symbols (X symbol and hamburger icon)
+    https://fonts.google.com/icons?icon.platform=web
+    google has fonts that turn text into sybols
+    link for more info
+  mobile/desktop
+    Create a version of a feature for desktop and a version of a feature for mobile
+    place them both in divs
+      <div class="desktop-feature"></div>
+      <div class="mobile-feature"></div>
+    hide the mobile one by default
+      .mobile-feature{
+        display: none;
+      }
+    if the screen width is less than 991px (a mobile phone)
+      hide the desktop version
+        .desktop{
+          display: none;
+        }
+      for the mobile one change the display value so it gets displayed
+        @media only screen and (max-width: 991px){
+          .mobile{
+            display: flex;
+          }
+        }
+  dropdown menu
+    inside the mobile menu add a div for dropdown content
+      <div class="dropDownContent">
+      </div>
+    add the v-show attribute with the toggle method set by menu and close icons
+      <div class="dropDownContent" v-show="menuDropdown">
+      </div>
+    place items inside of menu
+    set the dropdown menu content
+      position
+      animation
+        name
+        duration
+      background-color
+      color
+    @media only screen and (max-width: 991px){
+      .dropDownMenuContent {
+        animation-name: slidein;
+        position: absolute;
+        padding-top: 15px;
+        background-color: #242424;
+        padding-top: 20px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+    @keyframes slidein {
+      from {
+        opacity: 0;
+        margin-right: 100%;
+      }
+
+      to {
+        opacity: 100%;
+        margin-right: 0%;
+      }
+    }
+"Modal"
+  vue-easy-lightbox
+  add cdn to head of html
+    <script src="https://unpkg.com/vue-easy-lightbox@next/dist/vue-easy-lightbox.umd.min.js"></script>
+  gallery and other grid layouts
+    develop layout from CSS grid generator
+    https://cssgrid-generator.netlify.app/
+    position elements

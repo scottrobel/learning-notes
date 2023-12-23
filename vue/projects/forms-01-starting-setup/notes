@@ -1,0 +1,15 @@
+export NODE_OPTIONS=--openssl-legacy-provider
+npm run serve
+
+making the project
+  Semantics
+  Styling
+  Animations
+  form functionality
+personal notes
+  Do not get mad or stressed at The geeky ninja trying to rush me.
+  Instead respond nicley and work my hardest to be the best employee on the team
+  get the project done by wednesday so we have time for code review and fixes
+  review on multiple divices
+  My Unmatched Perspicacity Coupled With My Sheer Indefatigability
+  Makes Me a Feared Opponent in Any Realm of Human Endeavor

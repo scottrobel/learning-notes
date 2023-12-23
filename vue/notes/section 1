@@ -1,0 +1,6 @@
+Vue can be used to control parts of HTML pages
+you can use Vue on apart of a page or the entire page
+SPA-Single page application
+  server only sends one HTML page and Vue controls the UI
+Vue is component based
+Less popular than react and angular

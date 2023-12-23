@@ -1,0 +1,75 @@
+todo
+  Update Hubbly bubbly with new figma layout
+  Safe harbor
+    shrink navbar
+Done
+  make share this events buttons work
+  Site Logo
+    Ask for transparent background
+    replace logo
+    ask for transparent background
+  send w-9
+  send banking info
+  update the events page to be more dynamic
+    create config file
+      with javascript dates of events
+    use config file
+    write code to determine if an event has passed
+    change style for events to allow more events
+  finish gallery and load files photos from same config file
+    create mobile gallery
+      gnerate grid pattern
+      create html
+      create method to position items
+    load more button (for desktop gallery)
+      create method to load more items
+      have allPhotos and displayedPhotos ref
+      add 10 photos to displayedPhotos ref when button is pressed
+      remove loadmore button when all photos are loaded
+        create computed property to determine if there are more photos loaded
+    add more space on top and less on bottom
+  Also please add some space under "Instagram Feeds" (like its previous section...)
+  update Instagram component using config file to store links
+    vue-final-modal: https://vue-final-modal.org/
+    download instagram content
+    create config files
+  switch import to ../modules/galleryData.js
+  get rid of console.log for gallery data
+  fill out w-9
+  finish footer
+  Hide gallery/events
+  update contact info
+  create templates for
+    landing page
+    gallery
+    events
+  creates routes
+    label routes with headings
+  Commit views
+  create router commit
+    add router
+    add main.js
+  commit yarn.lock
+    -add vue router
+Base project off of this
+
+TODO
+  take extensive notes on navbar
+  attempt to recreate the navbar just from using my notes
+Features
+  Events page
+    Use page logic to create make event page dynamically created from data
+    should be fully data-managed model
+  Footer
+    create footer
+  Instagram feed
+    IG handle: the_hubbly_bubbly
+  Other
+    Update contact info with info from facebook
+project notes 
+  We are only making the dark theme
+  Use composition api
+  take notes on
+    code/folder structure is in other repos
+    additional notes on project
+  Ask Graham if he want a message to show up confirming if users are over 21

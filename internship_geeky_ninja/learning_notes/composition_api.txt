@@ -1,0 +1,11 @@
+why do we need it
+in other vue apps
+  code that logically belongs together is in different files
+reusing logic across somponents can be tricky and cumbersome
+logic is bundled in a setup method added to the component config object
+composition api
+  merges
+    data()
+    methods
+    computed
+    watch

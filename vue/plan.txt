@@ -1,0 +1,9 @@
+Learn Vue
+  learn emit
+  learn typescript
+  learn Test driven development
+  learn jest
+  learn cypress
+  Learn to use Vuex to separate methods from components
+Learn node
+Learn docker

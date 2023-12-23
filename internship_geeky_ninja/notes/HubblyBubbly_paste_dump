@@ -1,0 +1,19 @@
+ let's just manually build components that we can control 100% and call it a problem for later.
+- Download /host the images
+- Implement a modal viewer
+- Link to the original IG post?
+
+1. Create a config file somewhere, @Daniel Alavi can provide some suggestions. This can be a module that other components can consume.
+Inside this file, define an object/array containing a gallery, something like this: 
+const galleryImages = [
+  0: { //example item
+    imagePath: "/images/gallery/photo001.jpg",
+    imageName: "Sample Image",
+    imageDescription: "This is just a test image",
+    ig: "https://instagram.com/p/r@nd0m1D", // optional
+    fb: "https://facebook.com/optional-post-id", // optional
+  },
+  // Repeat for element 1, 2, 3, etc
+];
+
+Both the gallery and the IG feed components can consume this config object. Logic could be that maybe the home page only displays options that have an ig key defined, or we define an array of image IDs that we want to use. The point is that the components can decide what to do with this data.

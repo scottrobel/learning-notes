@@ -1,0 +1,13 @@
+Sure! The contract stores the stakes in a data structure that pairs the address of the
+stake owner to a data stu that contains the stake amount, total staking time, time of last claim and the unlock timestamp.
+when the deposit function is called, It will search this data structure for any existing stakes.
+If there is no stake found for the wallet address calling the desposit function,
+it will create a new one.
+If there is a stake found, it will increase the staking time, increase the stake amount,
+and mints the pending rewards that the stake has generated to far. I would like some clarification on
+what is happening with the mint function. Is the function sending the pending rewards to the user?
+
+
+However, If the user tries to stake for less than 1 month, The contract will revert the transaction.
+```mapping(address => Stake) private stakes;```
+When the deposit function is called, the

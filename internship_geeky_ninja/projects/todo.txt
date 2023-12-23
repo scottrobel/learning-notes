@@ -1,0 +1,100 @@
+TAKE OWNERSHIP OF EVERYTHING THAT HAPPENS AT THE COMPANY
+TODO
+  Try to add values section if it looks good
+  Add links to events
+  Modify the funding meter
+Done so far
+  HubblyBubbly
+    update About and INstagram feed fonts
+    import new font
+    update desktop headers
+    TODO
+    update sizing margin and position for mobile layout
+  ask about arcs in background
+  add Veteran owned bussness
+  Safe harbor
+    Update text on old design
+    Update goals
+    make mission more responsive
+      (flex-col for smaller widths, and object-cover for the image...)
+    remove legacy mission
+    remove second 
+    Whatever this means
+      1. Err, we have headers and placeholder text for them, but we have the image. Let's be clearer. Copy the text from the image and place it into the design we have, and remove the image. Maybe we can use the blue circles if we make a better quality version, but I don't think that's in the design. (edited)
+    add event regestration link
+  Add mission/vision text
+  fix mobile navbar (the blur filter broke it some how)
+  hid the news letter bar
+  hid the footer links
+  added text to footer
+  added fund raising text
+  added link to event regestration
+Did not do
+  Add "All through the gospel of grace"
+    I am not sure if and I need to add a value section
+  update the funding meter
+    I might need a designer for that
+
+
+DONE
+  Safe harbor
+    create repo
+    start layout
+    ask about responseivness
+    make it non-transaparent
+    shrink nav bar
+    Hide newsletter bar
+    replace footer text
+    hide footer links
+    full screen mobile menu
+    changed regester here link on page
+  VRT
+    his appears to fetch transactions/events, I'm not sure it's using the right event, it probably should use the deposit event,
+      Your right! It should be using the deposit event!
+      I don't know why it wasn't.
+    After that it loops through every event (could get intensive with multiple users/deposits over time) and inserts the ones that are not in the database, into the DB.
+      I changed it to insert all the new users in one api call.
+      Should be much more efficent
+    A minor concern is that the functions are both async, so it needs to be understood that the script will be run with only the wallets that existed the last time the script was run. 
+      In the main function I prefixed each function call with "await" so it waits for the database to update before it claims the rewards
+      Will that fix the problem
+DONE
+  1. Let's remove the lipsum from the footer. Blank is better.
+    ©2023 Hubbly Bubbly Club
+  2. On mobile tapping the page content should close the menu, not just the X button.
+  2. On mobile tapping the page content should close the menu, not just the X button.
+    MHO I suggest you adjust the spacing between the title “Instagram Feeds” and the actual thumbnails. Both on the web and mobile. (edited)
+  3. It would be nicer if you add a cursor: pointer; when we hover over each rewards/buttons.
+VRT
+  Check for updates on removing footer section
+  5. There should be a "Click to Learn More" text when we hover over each rewards.
+   4. Please add the page link in the navbar.
+  1. Lets add a max width to the page content (same amount as the /stake page).
+  2. The font size can be improved after you set the max width so make sure they aren't too THICK or thin.
+  6. The red squares aren't in a straight line, this can be achieved by positioning 
+    the rewards text as absolute (position: absolute;) and doing some adjustments
+    from there. The text shouldn't affect the height of the parent element.
+  make repsonsive
+    just shrink the layout and decrease the numbers of columns in the rewards icons…
+  make Redeem cart into "buy it now" button
+  BUY IT NOW" button should be green.
+    Am I removing the section entirly?
+  Update feedback notes + check feedback notes before pushing
+  auto claim
+    test script on test net
+    problems
+      getting the contract address in the code based on the network
+      	const [deployer, user] = await ethers.getSigners();
+      getting RPC address address based on the network
+      	const [deployer, user] = await ethers.getSigners();
+      script or task
+        script
+      make it apart of the repo?
+        yes
+      using ethers instead of web3?
+        use ethers
+  both
+    keep track of hours
+HubblyBubbly
+  remove rounded corners on the right
+  Position fixed on navbar

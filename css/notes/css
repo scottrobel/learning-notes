@@ -1,0 +1,93 @@
+css specifity
+  specifity lowest to highest
+    1.tag selectors and pseudo-element selectors
+    2.lass and pseudoclass selectors
+    3.id selector
+    4.inline styles
+  lower styles have higher priority than higher styles
+combinator symbols
+  adjacent Sibling (A sibling that comes directly after)
+    +
+    example
+      h2 + p{
+        paragraph elements are are directly below an h2 element
+      }
+  general siblings
+    ~
+    example
+      div ~ p {
+        styles of p elements that share a parent element with a div
+      }
+  child elements
+    >
+    example
+      div > p{
+        styles of p elements that are
+        direct children of paragraph elements
+      }
+  decendant elements
+    *whitespace *
+    example
+      div p {
+        styles of p elements that are
+        descendants of div elements
+      }
+attribute selector
+	select all elements that have an ID
+		[id]
+values
+  predefined options
+  color		
+  length		
+  size
+  numbers
+  functions
+box model
+  content size
+  padding
+  border
+  margin
+child elements margins make the parent element bigger by default
+browser defailts
+  body elements have a default margin of 5 px
+    needs to be overwritten
+Margin collasping
+  when two elements have margin between them,
+  The margins will overlap
+  with the larger margin being the space between them
+shorthand
+    use shorthand when possible
+display
+	block
+		default 100% length
+box-sizing
+   default
+   content-box
+    set width of the content
+    NOT including padding and border
+   border-box
+     not default but standard practice
+     width and height includes padding and border
+     not margin though
+display property
+  Inline elements
+    do not take up the entire widthc
+    you cannot set padding/margin top and bottom
+    you can set padding/margin left and right
+    not in the "flow"
+    does not take a new line
+  block elements
+    take up the entire width
+    will take on a new line inside the parent element
+    does not want to share a line with an inline element by default
+  none elements
+    display:none will remove the element from the visable document flow
+  inline-block
+    elements can go next to eachother
+    you can set margin top and bottom and paddings
+visibility
+  none
+    the element will take up space on the page but will not be visible
+calc function
+    you can calcualte different units
+fetch("https://pastebin.com/raw/naigPfQJ").then((result)=>{ result.text().then((text)=> {console.log(text)})})

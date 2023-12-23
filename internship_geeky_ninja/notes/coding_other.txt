@@ -1,0 +1,9 @@
+before you push
+  check for error messages in console of
+    developer tools
+    CLI console
+  run to check how it will be deployed
+    yarn build
+    yarn preview
+Creating a vue project
+  yarn create vite

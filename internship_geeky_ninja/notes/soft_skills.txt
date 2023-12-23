@@ -1,0 +1,20 @@
+Pushing
+  Create a branch for every feature
+    example
+      nav-bar-light-mode
+  Push daily
+  create PRs for features/deployments
+when working
+  Keep track of time
+motivation
+    Remember that I chose to volunteer.
+    They are paying to train me.
+    I am paying for more for an education at school that will grant me far less options.
+    The year may suck but it will forever change my life
+    Once I transfer/job hop I will be able to afford a place to live and tuition + have better options
+    for what school I will goto
+    Main rule is Do not take up other peoples time!
+    I will get kicked off the team if I do this
+    I am paired up with Daniel
+I started working at TGN on october 25 (for the sake of other jobs)
+for personal sake, I started december 6th

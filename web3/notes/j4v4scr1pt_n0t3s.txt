@@ -1,0 +1,17 @@
+importing the abi
+  first compile the abi with
+    yarn solcjs --bin --abi --include-path node_modules/ --base-path . -o . SimpleStorage.sol
+  then import it with
+    const abi = fs.readFileSync("./SimpleStorage_sol_SimpleStorage.abi", "utf8");
+creating a contract
+  const contractFactory = new ethers.contractFactory(abi, binary, wallet);
+  const contract = await contractFactory.deploy();
+waiting for confirmations
+  const numberOfBlocks = 1;
+  const deployentReceipt = await contract.deployTransacgtion.wait(numberOfBlocks);
+creating a transaction
+  const tx = {
+    nonce: uniqueTransactionIdentifier,
+    
+
+  }

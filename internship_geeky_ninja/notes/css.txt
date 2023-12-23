@@ -1,0 +1,38 @@
+animations
+  Keyframe
+    Use a keyframe to define the animation of two css values at once
+    for example
+    @keyframes slidein
+    the keyframe animation is triggered when the animation-name property is specified
+    Example
+    .button:hover{
+      animation-name: keyframeName;  
+    }
+    to use a keyframe you must specific a animation-duration attribute on the animated element
+  CSS
+    //specified outside css identifier
+    @keyframes keyframeName {
+      from {
+        property-one: starting-value;
+        property-two: starting-value;
+      }
+
+      to {
+        property-one: ending-value;
+        property-two: ending-value;
+      }
+    }
+    .button{
+      animation-duration: 4s;
+    }
+grid
+  you can set the grid-column sizes by
+  grid-template-columns: 200px 100px;
+    fr units
+      fr means fractional
+      a 2fr column will take up twice as much space as a 2fr column
+      example:
+        grid-template-columns: 1fr 2fr;
+    repeat
+      can create a shorthand for adding of the same units for css
+      repeat(4, 100px) = grid-template-columns: 100px 100px 100px 100px;

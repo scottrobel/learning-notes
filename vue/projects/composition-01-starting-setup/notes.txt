@@ -1,0 +1,40 @@
+before you run the sever
+export NODE_OPTIONS=--openssl-legacy-provider
+setup method
+inside of "export default"
+  you cannot use 'this' keyword since the attributes of this are not loaded yet
+shorthand for using the setup method inside of export default
+<script setup></script>
+ref
+  creates a reactive value just like data attribute in the options api
+  you must import it in the script you use
+  outside of the setup method
+    import { ref } from 'vue';
+  create constant ref
+    const uName = ref('Maximilian');
+  return the data
+    return {userName: userName}
+  shortcut for returning data
+    return { userName }
+  you can change the value with
+    userName.value = 'New Value';
+  you do not have to use userName.value to output code on screen
+  vue will automatically call it for you
+  will work but more verbose than needed
+    <div>{{ userName.value }}</div>
+  standard way of using a ref in text
+    <div>{{ userName\ }}</div>
+reactive
+  like ref but made for objects
+  import it
+    import { reactive } from 'vue';
+  use it
+    const user = reactive({
+      name: 'Maximilian',
+      age: 31
+    });
+  you can acess object values without the value function
+    ref syntax
+      user.value.age = 21;
+    reactive syntax
+      user.age = 21;

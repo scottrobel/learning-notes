@@ -1,0 +1,49 @@
+Setting up a repo
+  Use composition API,
+    with <script setup>
+  Vite,
+  Yarn,
+  Vue router
+  axios
+  in index.html set the title to the app name
+  in index.html import font styles
+    example
+      <link rel="preconnect" href="https://fonts.googleapis.com" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0"
+      />
+  Add CI
+    Buildspec File
+      https://git.thegeeky.ninja/TheGeekyNinja/HubblyBubbly/~commits/51c1cf71ba400dd1f1152b849f0fd58bdc376408
+  create monorepo
+routing
+  To create a link do router-link tag with the to attribute.
+  inside the to attrubute {name: RouteName}
+vue files
+  referencing photos
+    You can reference images in the /public directory without specifying /public
+    Use /images/hello.jpg to link an image instead of /public/images/hello.jpg
+composition api
+  set a data property
+    import { ref } from "vue";
+    const usersName = ref("Scott Robel");
+    //is a constant but can be changed
+  changing a data property
+    usersName.value = "Nancy Aiken";
+  declaring a vue function
+    const toggleMenuDropdown = () => {
+      menuDropdown.value = !menuDropdown.value;
+    };
+  triggering a vue function
+    <h1 @click="toggleMenuDropdown">
+config files
+  Store in src/modules as JS file
+  ex: src/modules/galleryData.js
+  create constant of configuration
+  export default constantName;

@@ -1,0 +1,51 @@
+//  paste task and time stamp
+// Keep track of time
+TODO
+  Create staking rewards menu
+    create rewards cart
+        style section
+      Make bottom section of cart
+        Create HTML
+        CREATE CSS
+      Make the items section dynamic with vue reference
+      Goal 6:00 update time log
+    create top
+    create CSS layout
+    ask about for functionality
+    ask about routing
+      -update routes
+    update daniel on pro`gress and timespan
+DONE
+  start Log time
+    clone repo
+    create new branch
+    -from main branch
+    read personal notes
+  install yarn
+  install node
+      crop icons from page
+      -crop a row of photos
+      -crop individual icons from the row
+            -paste icons into repo
+  create route
+  create view file
+    Create Header
+    -create HTML
+    -create CSS
+  create menu
+    -create HTML
+    -dynamically created with reactive
+      -create style
+      make logos red square divs
+        -style snack amount
+          -make disapear when parent element isnt hovered
+        -style margins
+      create css to make Rsnacks cost appear when hovered    
+              use
+                div.parent:hover
+      -style
+          create header of cart
+        create HTML for header of cart
+        create CSS
+        create items section
+        create HTML for items section
